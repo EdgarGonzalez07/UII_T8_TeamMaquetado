@@ -1,4 +1,4 @@
-package utez.edu.mx.ui.screens
+ package utez.edu.mx.ui.screens
 
 //La pantalla principal con botones grandes para grabar audio tomar fotos y videos
 import android.Manifest
@@ -9,7 +9,9 @@ import android.os.Build
 import android.os.Environment
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
@@ -107,6 +109,7 @@ fun RecordingScreen(mediaViewModel: MediaView) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.LightGray)
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -120,10 +123,56 @@ fun RecordingScreen(mediaViewModel: MediaView) {
             }
         } else {
 
+            Column( modifier = Modifier
+                .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text="Multimedia Recording",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+                )
+
+            }
+
+            // FOTO Y VIDEO
+                ActionButton(
+                    text = "Foto",
+                    icon = Icons.Default.CameraAlt,
+                    color = Color(0xFFDAA520),
+                    textColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    modifier = Modifier.fillMaxWidth().height(120.dp),
+                    isEnabled = !isRecordingAudio,
+                    onClick = {
+                        val uri = createTempUri(context, Media.IMAGE)
+                        tempImageUri = uri
+                        imageLauncher.launch(uri)
+                    }
+                )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+            ActionButton(
+                    text = "Video",
+                    icon = Icons.Default.Videocam,
+                    color = Color(0xFF20B2AA),
+                    textColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    modifier = Modifier.fillMaxWidth().height(120.dp),
+                    isEnabled = !isRecordingAudio,
+                    onClick = {
+                        val uri = createTempUri(context, Media.VIDEO)
+                        tempVideoUri = uri
+                        videoLauncher.launch(uri)
+                    }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
             ActionButton(
                 text = if (isRecordingAudio) "Detener la Grabación" else "Grabar un Audio",
                 icon = if (isRecordingAudio) Icons.Default.Stop else Icons.Default.Mic,
-                color = if (isRecordingAudio) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primaryContainer,
+                color = if (isRecordingAudio) MaterialTheme.colorScheme.error else Color(0xFFF08080),
                 textColor = if (isRecordingAudio) Color.White else MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.fillMaxWidth().height(120.dp),
                 onClick = {
@@ -145,41 +194,7 @@ fun RecordingScreen(mediaViewModel: MediaView) {
                 }
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
 
-            // FOTO Y VIDEO
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                ActionButton(
-                    text = "Foto",
-                    icon = Icons.Default.CameraAlt,
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    textColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    modifier = Modifier.weight(1f).height(120.dp),
-                    isEnabled = !isRecordingAudio,
-                    onClick = {
-                        val uri = createTempUri(context, Media.IMAGE)
-                        tempImageUri = uri
-                        imageLauncher.launch(uri)
-                    }
-                )
-                ActionButton(
-                    text = "Video",
-                    icon = Icons.Default.Videocam,
-                    color = MaterialTheme.colorScheme.tertiaryContainer,
-                    textColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                    modifier = Modifier.weight(1f).height(120.dp),
-                    isEnabled = !isRecordingAudio,
-                    onClick = {
-                        val uri = createTempUri(context, Media.VIDEO)
-                        tempVideoUri = uri
-                        videoLauncher.launch(uri)
-                    }
-                )
-            }
-        }
     }
 }
 
