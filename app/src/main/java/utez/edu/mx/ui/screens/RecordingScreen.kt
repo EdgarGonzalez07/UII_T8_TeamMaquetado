@@ -109,7 +109,7 @@ fun RecordingScreen(mediaViewModel: MediaView) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.LightGray)
+            .background(Color(0xfff2f2f2))
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -126,19 +126,19 @@ fun RecordingScreen(mediaViewModel: MediaView) {
             Column( modifier = Modifier
                 .padding(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text="Multimedia Recording",
-                fontSize = 24.sp,
+                Text(text="MULTIMEDIA RECORDING",
+                fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                    color = Color(0xFFe0a846),
                 )
-
             }
+            Spacer(modifier = Modifier.height(35.dp))
 
             // FOTO Y VIDEO
                 ActionButton(
                     text = "Foto",
                     icon = Icons.Default.CameraAlt,
-                    color = Color(0xFFDAA520),
+                    color = Color(0xFFfad646),
                     textColor = MaterialTheme.colorScheme.onSecondaryContainer,
                     modifier = Modifier.fillMaxWidth().height(120.dp),
                     isEnabled = !isRecordingAudio,
@@ -155,7 +155,7 @@ fun RecordingScreen(mediaViewModel: MediaView) {
             ActionButton(
                     text = "Video",
                     icon = Icons.Default.Videocam,
-                    color = Color(0xFF20B2AA),
+                    color = Color(0xFF36d1bc),
                     textColor = MaterialTheme.colorScheme.onTertiaryContainer,
                     modifier = Modifier.fillMaxWidth().height(120.dp),
                     isEnabled = !isRecordingAudio,
@@ -170,10 +170,10 @@ fun RecordingScreen(mediaViewModel: MediaView) {
             Spacer(modifier = Modifier.height(16.dp))
 
             ActionButton(
-                text = if (isRecordingAudio) "Detener la Grabación" else "Grabar un Audio",
+                text = if (isRecordingAudio) "Detener la Grabación" else "Audio",
                 icon = if (isRecordingAudio) Icons.Default.Stop else Icons.Default.Mic,
-                color = if (isRecordingAudio) MaterialTheme.colorScheme.error else Color(0xFFF08080),
-                textColor = if (isRecordingAudio) Color.White else MaterialTheme.colorScheme.onPrimaryContainer,
+                color = if (isRecordingAudio) MaterialTheme.colorScheme.error else Color(0xFFeb7595),
+                textColor = if (isRecordingAudio) Color.White else MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.fillMaxWidth().height(120.dp),
                 onClick = {
                     if (isRecordingAudio) {

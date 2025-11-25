@@ -11,11 +11,14 @@ import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -129,12 +132,21 @@ fun AppNavigation() {
 // barrita de abajo
 @Composable
 fun AppBottomNavBar(navController: NavHostController) {
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color(0xfffcfcfc)
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
         navBarItems.forEach { screen ->
             NavigationBarItem(
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = Color(0xFFc4933d),      // amarillo fuerte
+                    unselectedIconColor = Color(0xFFe0a846),    // amarillo intermedio
+                    selectedTextColor = Color(0xFFc4933d),      // igual que el icono seleccionado
+                    unselectedTextColor = Color(0xFFe0a846),    // amarillo suave
+                    indicatorColor = Color(0xFFfce5bb)          // amarillo muy claro (fondo suave)
+                ),
                 icon = { Icon(screen.icon, contentDescription = screen.label) },
                 label = { Text(screen.label) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
@@ -148,6 +160,7 @@ fun AppBottomNavBar(navController: NavHostController) {
                     }
                 }
             )
+
         }
     }
 }
