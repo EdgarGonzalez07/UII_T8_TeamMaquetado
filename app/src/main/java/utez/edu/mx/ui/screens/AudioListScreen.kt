@@ -37,7 +37,9 @@ fun AudioListScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("A u d i o s") },
+                title = { Text(text = "AUDIOS",
+                    fontWeight = FontWeight.Bold,
+                    ) },
                 actions = {
                     Text(
                         text = "Volumen: ${(currentVolume * 100).toInt()}%",

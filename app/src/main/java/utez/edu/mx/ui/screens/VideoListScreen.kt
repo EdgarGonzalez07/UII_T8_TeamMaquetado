@@ -41,7 +41,8 @@ fun VideoListScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = { Text("V i d e o s") })
+            CenterAlignedTopAppBar(title = { Text("VIDEOS",
+                fontWeight = FontWeight.Bold,)})
         }
     ) { padding ->
         if (videoList.isEmpty()) {
@@ -59,6 +60,7 @@ fun VideoListScreen(
             ) {
                 items(videoList) { item ->
                     VideoCard(
+
                         item = MediaItem(
                             id = item.id,
                             uri = item.uri,
@@ -88,7 +90,9 @@ fun VideoCard(item:MediaItem, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .background(Color(0xfffafafa))
+                .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(contentAlignment = Alignment.Center) {
@@ -122,7 +126,7 @@ fun VideoCard(item:MediaItem, onClick: () -> Unit) {
                 Text(
                     text = formatDuration(item.duration),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color(0xFF67add6)
                 )
                 Text(
                     text = formatDate(item.date),

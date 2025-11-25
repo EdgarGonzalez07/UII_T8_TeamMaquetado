@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,7 @@ fun AudioCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = Color(0xfff5f0f4))
     ) {
         Row(
             modifier = Modifier
@@ -58,7 +59,7 @@ fun AudioCard(
                 Icon(
                     Icons.Default.AudioFile,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = Color(0xFFeb7595)
                 )
             }
 
@@ -88,7 +89,7 @@ fun AudioCard(
                 modifier = Modifier
                     .size(50.dp)
                     .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primary)
+                    .background(Color(0xFFeb7595))
             ) {
                 Icon(
                     if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
